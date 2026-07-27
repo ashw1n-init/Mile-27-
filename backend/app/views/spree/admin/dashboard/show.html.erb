@@ -1,0 +1,64 @@
+<% content_for :page_title do %>Operations overview<% end %>
+
+<section class="m27-overview-head">
+  <div>
+    <p class="m27-overview-kicker">Mile27 / Live operations</p>
+    <h1>Good <%= Time.zone.now.hour < 12 ? 'morning' : Time.zone.now.hour < 17 ? 'afternoon' : 'evening' %>, <%= try_spree_current_user.first_name.presence || 'team' %>.</h1>
+    <p>Monitor commerce health, resolve exceptions, and move work forward.</p>
+  </div>
+  <div class="m27-overview-actions">
+    <%= link_to spree.admin_orders_path, class: 'btn btn-light' do %>
+      <%= icon('list-search') %> Review orders
+    <% end %>
+    <% if can?(:create, Spree::Product) %>
+      <%= link_to spree.new_admin_product_path, class: 'btn btn-primary' do %><%= icon('plus') %> New product<% end %>
+    <% end %>
+  </div>
+</section>
+
+<nav class="m27-operation-deck" aria-label="Primary operations">
+  <% if can?(:admin, Spree::Order) %>
+    <%= link_to spree.admin_orders_path, class: 'm27-operation-link' do %>
+      <span class="m27-operation-link__index">01</span><%= icon('shopping-bag') %><span><strong>Orders</strong><small>Payment to fulfilment</small></span><%= icon('arrow-up-right') %>
+    <% end %>
+  <% end %>
+  <% if can?(:admin, Spree::Product) %>
+    <%= link_to spree.admin_products_path, class: 'm27-operation-link' do %>
+      <span class="m27-operation-link__index">02</span><%= icon('package') %><span><strong>Products</strong><small>Catalogue and variants</small></span><%= icon('arrow-up-right') %>
+    <% end %>
+  <% end %>
+  <% if can?(:admin, Spree::StockItem) %>
+    <%= link_to spree.admin_stock_items_path, class: 'm27-operation-link' do %>
+      <span class="m27-operation-link__index">03</span><%= icon('building-warehouse') %><span><strong>Inventory</strong><small>Stock and locations</small></span><%= icon('arrow-up-right') %>
+    <% end %>
+  <% end %>
+</nav>
+
+<%= render 'live_visitors' %>
+
+<div class="grid grid-cols-12 gap-6 m27-overview-grid">
+  <div class="col-span-12 xl:col-span-9">
+    <div class="m27-section-bar">
+      <div><span>Performance</span><small>Verified store analytics</small></div>
+      <%= form_tag spree.admin_dashboard_analytics_path, method: :get, data: { turbo_frame: :analytics } do %>
+        <%= hidden_field_tag :vendor_id, @vendor.id if @vendor.present? %>
+        <%= render 'spree/admin/shared/calendar_range_picker',
+          date_from_value: params[:date_from] || 1.month.ago.end_of_day,
+          date_to_value: params[:date_to] || Time.zone.now.beginning_of_day,
+          css_classes: "btn btn-sm btn-light inline-flex items-center h-full dropdown-toggle" %>
+      <% end %>
+    </div>
+    <%= render 'analytics' %>
+  </div>
+  <aside class="col-span-12 xl:col-span-3">
+    <div class="m27-section-bar"><div><span>System</span><small>Store status</small></div></div>
+    <div class="m27-status-panel">
+      <div><span><i class="is-live"></i> Storefront</span><strong>Live</strong></div>
+      <div><span><i class="is-live"></i> Commerce API</span><strong>Connected</strong></div>
+      <div><span>Operating currency</span><strong><%= current_store.default_currency %></strong></div>
+      <div><span>Store locale</span><strong><%= current_store.default_locale %></strong></div>
+    </div>
+    <%= render 'sidebar' %>
+    <%= render_admin_partials(:dashboard_sidebar_partials) %>
+  </aside>
+</div>

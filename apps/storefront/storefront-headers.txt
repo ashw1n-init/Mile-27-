@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Set-Cookie: spree_country=us; Path=/; Expires=Mon, 26 Jul 2027 15:50:39 GMT; Max-Age=31536000
+Set-Cookie: spree_locale=en; Path=/; Expires=Mon, 26 Jul 2027 15:50:39 GMT; Max-Age=31536000
+Set-Cookie: spree_country=us; Path=/; Expires=Mon, 26 Jul 2027 15:51:21 GMT; Max-Age=31536000
+Set-Cookie: spree_locale=en; Path=/; Expires=Mon, 26 Jul 2027 15:51:21 GMT; Max-Age=31536000
+Vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+link: </_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"
+Cache-Control: no-cache, must-revalidate
+X-Powered-By: Next.js
+Content-Type: text/html; charset=utf-8
+Date: Sun, 26 Jul 2026 15:51:23 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+

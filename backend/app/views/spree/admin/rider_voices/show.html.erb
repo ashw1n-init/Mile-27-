@@ -1,0 +1,106 @@
+<% content_for :page_title do %>
+  Moderate rider contribution
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to "Back to rider voices", main_app.admin_rider_voices_path, class: "btn btn-light" %>
+<% end %>
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+  <div class="xl:col-span-2 space-y-6">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <strong><%= @rider_voice.contribution_type.humanize %></strong>
+          <% if @rider_voice.rating %><span class="ms-2"><%= @rider_voice.rating %>/5</span><% end %>
+        </div>
+        <span class="badge badge-light"><%= @rider_voice.status.humanize %></span>
+      </div>
+      <div class="card-body">
+        <% if @rider_voice.title.present? %>
+          <h2 class="text-2xl font-semibold mb-4"><%= @rider_voice.title %></h2>
+        <% end %>
+        <div class="prose max-w-none"><%= simple_format(@rider_voice.body) %></div>
+      </div>
+    </div>
+
+    <% if @rider_voice.media.any? %>
+      <div class="card">
+        <div class="card-header"><strong>Media moderation</strong></div>
+        <div class="card-body grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% @rider_voice.media.each do |media| %>
+            <div class="border rounded p-3">
+              <div class="text-sm font-semibold mb-2"><%= media.media_type.humanize %> · <%= media.status.humanize %></div>
+              <% if media.file.attached? && media.image? %>
+                <%= image_tag media.file, class: "w-full h-56 object-cover rounded", alt: media.alt_text.to_s %>
+              <% elsif media.file.attached? && media.video? %>
+                <%= video_tag url_for(media.file), controls: true, preload: "none", class: "w-full" %>
+              <% elsif media.file.attached? %>
+                <%= audio_tag url_for(media.file), controls: true, preload: "none", class: "w-full" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="card">
+      <div class="card-header"><strong>Moderation history</strong></div>
+      <div class="card-body">
+        <% if @rider_voice.moderation_actions.any? %>
+          <ol class="space-y-4">
+            <% @rider_voice.moderation_actions.order(created_at: :desc).each do |action| %>
+              <li>
+                <strong><%= action.action.humanize %></strong>
+                <span class="text-muted">from <%= action.previous_status %> to <%= action.new_status %> · <%= l(action.created_at, format: :long) %></span>
+                <% if action.note.present? %><div class="mt-1"><%= action.note %></div><% end %>
+              </li>
+            <% end %>
+          </ol>
+        <% else %>
+          <p class="text-muted">No moderation actions yet.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <aside class="space-y-6">
+    <div class="card">
+      <div class="card-header"><strong>Trust context</strong></div>
+      <dl class="card-body space-y-3">
+        <div><dt class="text-muted text-sm">Product</dt><dd><%= @rider_voice.product.name %></dd></div>
+        <div><dt class="text-muted text-sm">Public name</dt><dd><%= @rider_voice.display_name %></dd></div>
+        <div><dt class="text-muted text-sm">Verified purchase</dt><dd><%= @rider_voice.verified_purchase? ? "Yes" : "No" %></dd></div>
+        <div><dt class="text-muted text-sm">Variant</dt><dd><%= @rider_voice.variant&.options_text || "Not supplied" %></dd></div>
+        <div><dt class="text-muted text-sm">Reports</dt><dd><%= @rider_voice.reports.open.count %></dd></div>
+        <div><dt class="text-muted text-sm">Submitted</dt><dd><%= l(@rider_voice.created_at, format: :long) %></dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><strong>Moderation decision</strong></div>
+      <div class="card-body">
+        <%= form_with url: main_app.moderate_admin_rider_voice_path(@rider_voice), method: :post, local: true, class: "space-y-4" do |form| %>
+          <div>
+            <%= form.label :highlighted_quote, "Featured quote", class: "form-label" %>
+            <%= form.text_area :highlighted_quote, value: @rider_voice.highlighted_quote, maxlength: 320, rows: 4, class: "form-control" %>
+          </div>
+          <label class="flex items-center gap-2">
+            <%= form.check_box :featured, checked: @rider_voice.featured? %>
+            <span>Feature this contribution</span>
+          </label>
+          <div>
+            <%= form.label :note, "Internal note", class: "form-label" %>
+            <%= form.text_area :note, rows: 3, class: "form-control" %>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <%= form.button "Approve", name: :moderation_action, value: :approve, class: "btn btn-primary" %>
+            <%= form.button "Reject", name: :moderation_action, value: :reject, class: "btn btn-danger" %>
+            <%= form.button "Hide", name: :moderation_action, value: :hide, class: "btn btn-light" %>
+            <%= form.button(@rider_voice.locked? ? "Unlock" : "Lock", name: :moderation_action, value: (@rider_voice.locked? ? :unlock : :lock), class: "btn btn-light") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+</div>

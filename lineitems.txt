@@ -1,0 +1,7 @@
+﻿node.exe : [31morder_not_found:[39m Order not found
+At C:\Users\Atman\mile27\node_modules\.bin\spree.ps1:24 char:5
++     & "node$exe"  "$basedir/../@spree/cli/dist/index.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31morder_not_...Order not found:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

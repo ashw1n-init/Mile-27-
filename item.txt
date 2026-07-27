@@ -1,0 +1,7 @@
+﻿node.exe : [31merror:[39m Request body is not valid JSON
+At C:\Users\Atman\mile27\node_modules\.bin\spree.ps1:24 char:5
++     & "node$exe"  "$basedir/../@spree/cli/dist/index.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31merror:[39... not valid JSON:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

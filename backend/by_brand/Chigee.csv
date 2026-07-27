@@ -1,0 +1,116 @@
+migration_key,source_shopify_handle,name,source_title,slug,description,source_description_html,description_plain_text,price,compare_at_price,available_on,status,brand,weight,weight_unit,meta_title,meta_description,verified_feature_summary,title_change_reason,title_confidence,requires_review,primary_taxon_path,category_confidence,category_reason,variants,variant_skus,variant_count,images,image_count,image_alt_texts,tags,tag_count,story_title,story_introduction,story_module_design,story_module_experience,story_module_feature_focus,story_module_use_case,story_module_buyer_note,story_module_closing,story_eligible,story_editorial_status,story_media_refs,story_media_count,redirect_required,redirect_from,redirect_to
+chigee-aio-6-lte-4g-smart-riding-display,chigee-aio-6-lte-4g-smart-riding-display,Chigee AIO-6 LTE 4G Smart Riding Display,Chigee AIO-6 LTE 4G Smart Riding Display,chigee-aio-6-lte-4g-smart-riding-display,"Featuring a 6-inch, 2000-nit ultra-bright display for superior visibility, AIO-6 LTE takes smart riding to the next level with 4G connectivity. Enjoy real-time tracking, remote…","<p><span>Featuring a 6-inch, 2000-nit ultra-bright display for superior visibility, AIO-6 LTE takes smart riding to the next level with 4G connectivity. Enjoy real-time tracking, remote control, and emergency SOS for enhanced safety.</span></p>
+<p>To enable 4G features on the AIO-6 LTE, you’ll need to insert a SIM card into the device.</p>
+<p><img src=""https://cdn.shopify.com/s/files/1/0076/8301/4754/files/specification_aio6.webp?v=1766380885"" alt=""""></p>","Featuring a 6-inch, 2000-nit ultra-bright display for superior visibility, AIO-6 LTE takes smart riding to the next level with 4G connectivity. Enjoy real-time tracking, remote control, and emergency SOS for enhanced safety.
+
+To enable 4G features on the AIO-6 LTE, you’ll need to insert a SIM card into the device.",53500,,2026-07-26,active,Chigee,2000,g,Buy Chigee AIO-6 LTE 4G Smart Riding Display | Mile 27 Store,"Featuring a 6-inch, 2000-nit ultra-bright display for superior visibility, AIO-6 LTE takes smart riding to the next level with 4G connectivity. Enjoy…",,Cleaned noise; brand verified,High,true,Motorcycle Accessories,Low,No type or title evidence — default fallback,chigee-aio-6-lte-4g-smart-riding-display-1|Default Title|price:53500.00|compare:|weight:2000|barcode:|qty:0,chigee-aio-6-lte-4g-smart-riding-display-1,1,https://cdn.shopify.com/s/files/1/0076/8301/4754/files/aio6-main3.webp?v=1766380925|pos:1|alt:Chigee Chigee AIO-6 LTE 4G Smart Riding Display – front view,1,Chigee Chigee AIO-6 LTE 4G Smart Riding Display – front view,,0,,,,,,,,,false,not_eligible,,0,false,/products/chigee-aio-6-lte-4g-smart-riding-display,/products/chigee-aio-6-lte-4g-smart-riding-display
+chigee-60fps-hdr-cameras-for-aio-6-series,chigee-60fps-hdr-cameras-for-aio-6-series,Chigee 60fps HDR Cameras for AIO-6 Series,Chigee 60fps HDR Cameras for AIO-6 Series,chigee-60fps-hdr-cameras-for-aio-6-series,Front camera: 105 cm / Rear camera: 260 cm |,"<h3>Camera Specifications</h3>
+<div class=""_tableContainer_1rjym_1"">
+<div class=""group _tableWrapper_1rjym_13 flex w-fit flex-col-reverse"" tabindex=""-1"">
+<table class=""w-fit min-w-(--thread-content-width)"" data-end=""696"" data-start=""75"">
+<thead data-end=""102"" data-start=""75"">
+<tr data-end=""102"" data-start=""75"">
+<th data-col-size=""md"" data-end=""91"" data-start=""75"">Specification</th>
+<th data-col-size=""md"" data-end=""102"" data-start=""91"">Details</th>
+</tr>
+</thead>
+<tbody data-end=""696"" data-start=""130"">
+<tr data-end=""162"" data-start=""130"">
+<td data-col-size=""md"" data-end=""147"" data-start=""130""><strong data-end=""146"" data-start=""132"">Resolution</strong></td>
+<td data-col-size=""md"" data-end=""162"" data-start=""147"">1920 × 1080</td>
+</tr>
+<tr data-end=""189"" data-start=""163"">
+<td data-col-size=""md"" data-end=""180"" data-start=""163""><strong data-end=""179"" data-start=""165"">Frame Rate</strong></td>
+<td data-end=""189"" data-start=""180"" data-col-size=""md"">60FPS</td>
+</tr>
+<tr data-end=""236"" data-start=""190"">
+<td data-col-size=""md"" data-end=""207"" data-start=""190""><strong data-end=""206"" data-start=""192"">Lens Angle</strong></td>
+<td data-col-size=""md"" data-end=""236"" data-start=""207"">D136.6°</td>
+</tr>
+<tr data-end=""303"" data-start=""237"">
+<td data-col-size=""md"" data-end=""258"" data-start=""237""><strong data-end=""257"" data-start=""239"">Lens Structure</strong></td>
+<td data-end=""303"" data-start=""258"" data-col-size=""md"">2 Glass + 4 Plastic + 1 IR-CUT, f = 1.8mm</td>
+</tr>
+<tr data-end=""329"" data-start=""304"">
+<td data-col-size=""md"" data-end=""322"" data-start=""304""><strong data-end=""321"" data-start=""306"">HDR Support</strong></td>
+<td data-col-size=""md"" data-end=""329"" data-start=""322"">Yes</td>
+</tr>
+<tr data-end=""372"" data-start=""330"">
+<td data-col-size=""md"" data-end=""348"" data-start=""330""><strong data-end=""347"" data-start=""332"">Camera Size</strong></td>
+<td data-end=""372"" data-start=""348"" data-col-size=""md"">39.6 × 35.98 × 47 mm</td>
+</tr>
+<tr data-end=""419"" data-start=""373"">
+<td data-col-size=""md"" data-end=""393"" data-start=""373""><strong data-end=""392"" data-start=""375"">Camera Weight</strong></td>
+<td data-end=""419"" data-start=""393"" data-col-size=""md"">Front: 60g / Rear: 90g</td>
+</tr>
+<tr data-end=""450"" data-start=""420"">
+<td data-col-size=""md"" data-end=""444"" data-start=""420""><strong data-end=""443"" data-start=""422"">Operating Voltage</strong></td>
+<td data-end=""450"" data-start=""444"" data-col-size=""md"">5V</td>
+</tr>
+<tr data-end=""496"" data-start=""451"">
+<td data-col-size=""md"" data-end=""483"" data-start=""451""><strong data-end=""482"" data-start=""453"">Front &amp; Rear Camera Specs</strong></td>
+<td data-end=""496"" data-start=""483"" data-col-size=""md"">Identical</td>
+</tr>
+<tr data-end=""663"" data-start=""559"">
+<td data-col-size=""md"" data-end=""609"" data-start=""559""><strong data-end=""608"" data-start=""561"">Length of Camera Cables</strong></td>
+<td data-col-size=""md"" data-end=""663"" data-start=""609"">Front camera: 105 cm / Rear camera: 260 cm</td>
+</tr>
+<tr data-end=""696"" data-start=""664"">
+<td data-col-size=""md"" data-end=""688"" data-start=""664""><strong data-end=""687"" data-start=""666"">Waterproof Rating</strong></td>
+<td data-col-size=""md"" data-end=""696"" data-start=""688"">IP68</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>","Camera Specifications
+
+Specification
+Details
+
+Resolution | 
+1920 × 1080 | 
+
+Frame Rate | 
+60FPS | 
+
+Lens Angle | 
+D136.6° | 
+
+Lens Structure | 
+2 Glass + 4 Plastic + 1 IR-CUT, f = 1.8mm | 
+
+HDR Support | 
+Yes | 
+
+Camera Size | 
+39.6 × 35.98 × 47 mm | 
+
+Camera Weight | 
+Front: 60g / Rear: 90g | 
+
+Operating Voltage | 
+5V | 
+
+Front & Rear Camera Specs | 
+Identical | 
+
+Length of Camera Cables | 
+Front camera: 105 cm / Rear camera: 260 cm | 
+
+Waterproof Rating | 
+IP68 |",21000,,2026-07-26,active,Chigee,3000,g,Buy Chigee 60fps HDR Cameras for AIO-6 Series | Mile 27 Store,"Front camera: 105 cm / Rear camera: 260 cm ,",,Cleaned noise; brand verified,High,false,Motorcycle Accessories,High,"Mapped from Shopify Type ""Bike Parts""",chigee-60fps-hdr-cameras-for-aio-6-series-1|Default Title|price:21000.00|compare:|weight:3000|barcode:|qty:0,chigee-60fps-hdr-cameras-for-aio-6-series-1,1,https://cdn.shopify.com/s/files/1/0076/8301/4754/files/aio6_camera_515c3c55-1ec2-418a-8a87-65aac72059f8.webp?v=1775288319|pos:1|alt:Chigee Chigee 60fps HDR Cameras for AIO-6 Series – front view,1,Chigee Chigee 60fps HDR Cameras for AIO-6 Series – front view,,0,,,,,,,,,false,not_eligible,,0,false,/products/chigee-60fps-hdr-cameras-for-aio-6-series,/products/chigee-60fps-hdr-cameras-for-aio-6-series
+chigee-bmw-quick-release-module-for-aio-6-series,chigee-bmw-quick-release-module-for-aio-6-series,Chigee BMW Quick-Release Module for AIO-6 Series,Chigee BMW Quick-Release Module for AIO-6 Series,chigee-bmw-quick-release-module-for-aio-6-series,Included in the package: • BMW Quick-Release Module ×1. • Quick-Release USB Cable ×1. • Camera Connection Cable ×1. • Installation Tool ×1.,"<p data-end=""86"" data-start=""58""><strong data-end=""86"" data-start=""58"">Included in the package:</strong></p>
+<ul data-is-only-node="""" data-is-last-node="""" data-end=""200"" data-start=""88"">
+<li data-end=""119"" data-start=""88"">BMW Quick-Release Module ×1</li>
+<li data-end=""146"" data-start=""120"">Quick-Release USB Cable ×1</li>
+<li data-end=""177"" data-start=""147"">Camera Connection Cable ×1</li>
+<li data-is-last-node="""" data-end=""200"" data-start=""178"">Installation Tool ×1</li>
+</ul>","Included in the package:
+
+• BMW Quick-Release Module ×1
+
+• Quick-Release USB Cable ×1
+
+• Camera Connection Cable ×1
+
+• Installation Tool ×1",18000,,2026-07-26,active,Chigee,2000,g,Chigee BMW Quick-Release Module for AIO-6 Series | Mile 27 Store,Included in the package: BMW Quick-Release Module ×1. Quick-Release USB Cable ×1. Camera Connection Cable ×1. Installation Tool ×1.,BMW Quick-Release Module ×1 | Quick-Release USB Cable ×1 | Camera Connection Cable ×1 | Installation Tool ×1,Cleaned noise; brand verified,High,false,Motorcycle Accessories,High,"Mapped from Shopify Type ""Bike Parts""",chigee-bmw-quick-release-module-for-aio-6-series-1|Default Title|price:18000.00|compare:|weight:2000|barcode:|qty:0,chigee-bmw-quick-release-module-for-aio-6-series-1,1,https://cdn.shopify.com/s/files/1/0076/8301/4754/files/BMW_Quick_Release_Module_ac9ee30c-db7e-4eaa-83d2-2d09fb204bc3.webp?v=1775288062|pos:1|alt:Chigee Chigee BMW Quick-Release Module for AIO-6 Series – front view || https://cdn.shopify.com/s/files/1/0076/8301/4754/files/bmw_quick_d91b6a82-1766-46a3-9275-5c3f572c9c57.webp?v=1775288062|pos:2|alt:Chigee Chigee BMW Quick-Release Module for AIO-6 Series – side view || https://cdn.shopify.com/s/files/1/0076/8301/4754/files/Chigee_AIO6LTE_30.webp?v=1775288062|pos:3|alt:Chigee Chigee BMW Quick-Release Module for AIO-6 Series – rear view,3,Chigee Chigee BMW Quick-Release Module for AIO-6 Series – front view | Chigee Chigee BMW Quick-Release Module for AIO-6 Series – side view | Chigee Chigee BMW Quick-Release Module for AIO-6 Series – rear view,,0,Chigee BMW Quick-Release Module for AIO-6 Series,Chigee BMW Quick-Release Module for AIO-6 Series. Included in the package: • BMW Quick-Release Module ×1.,,,BMW Quick-Release Module ×1. Quick-Release USB Cable ×1. Camera Connection Cable ×1. Installation Tool ×1.,,,Chigee BMW Quick-Release Module for AIO-6 Series — a motorcycle Accessory built to the specifications listed above.,true,draft,https://cdn.shopify.com/s/files/1/0076/8301/4754/files/BMW_Quick_Release_Module_ac9ee30c-db7e-4eaa-83d2-2d09fb204bc3.webp?v=1775288062|role:hero || https://cdn.shopify.com/s/files/1/0076/8301/4754/files/bmw_quick_d91b6a82-1766-46a3-9275-5c3f572c9c57.webp?v=1775288062|role:construction detail || https://cdn.shopify.com/s/files/1/0076/8301/4754/files/Chigee_AIO6LTE_30.webp?v=1775288062|role:side profile,3,false,/products/chigee-bmw-quick-release-module-for-aio-6-series,/products/chigee-bmw-quick-release-module-for-aio-6-series

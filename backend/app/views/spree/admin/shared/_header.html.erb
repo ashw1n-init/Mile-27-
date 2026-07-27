@@ -1,0 +1,70 @@
+<div id="scroll-header"></div>
+
+<header id="header" class="sticky top-0 z-[1020] py-0" data-controller="admin-command">
+  <nav class="m27-command-header">
+    <div class="m27-command-header__start">
+      <div class="lg:hidden">
+        <button type="button" class="btn btn-light px-2 no-underline" data-action="click->sidebar#openMobile" aria-label="Open navigation">
+          <%= icon('menu-2', class: 'mr-0') %>
+        </button>
+      </div>
+
+      <button type="button" class="sidebar-toggle-btn hidden lg:flex" data-action="click->sidebar#toggle" aria-label="<%= Spree.t('admin.expand_sidebar') %>">
+        <%= icon('layout-sidebar-left-collapse') %>
+      </button>
+
+      <% if settings_area? %>
+        <%= render 'spree/admin/shared/back_to_dashboard' %>
+      <% end %>
+
+      <%= render 'spree/admin/shared/breadcrumbs' %>
+    </div>
+
+    <button type="button" class="m27-command-trigger" data-action="admin-command#open" aria-haspopup="dialog">
+      <%= icon('search', class: 'm27-command-trigger__icon') %>
+      <span>Search operations</span>
+      <kbd><span class="hidden sm:inline">Ctrl</span>K</kbd>
+    </button>
+
+    <div class="m27-command-header__end">
+      <span class="m27-system-state"><i></i><span class="hidden xl:inline">Live store</span></span>
+      <span class="m27-store-context hidden md:inline"><%= current_store.name %></span>
+    </div>
+  </nav>
+
+  <dialog class="m27-command-dialog" data-admin-command-target="dialog" data-action="click->admin-command#closeOnBackdrop">
+    <section class="m27-command-panel" aria-label="Mile27 command palette">
+      <div class="m27-command-search">
+        <%= icon('search') %>
+        <input type="search" placeholder="Find an operation or destination" autocomplete="off"
+               data-admin-command-target="input" data-action="input->admin-command#filter">
+        <button type="button" data-action="admin-command#close" aria-label="Close command palette">Esc</button>
+      </div>
+      <div class="m27-command-results">
+        <p class="m27-command-group">Commerce operations</p>
+        <% if can?(:admin, Spree::Order) %>
+          <%= link_to spree.admin_orders_path, class: "m27-command-item", data: { admin_command_target: "item" } do %>
+            <%= icon('shopping-bag') %><span><strong>Orders</strong><small>Review, fulfil and manage returns</small></span><kbd>O</kbd>
+          <% end %>
+        <% end %>
+        <% if can?(:admin, Spree::Product) %>
+          <%= link_to spree.admin_products_path, class: "m27-command-item", data: { admin_command_target: "item" } do %>
+            <%= icon('package') %><span><strong>Products</strong><small>Catalogue, variants and publishing</small></span><kbd>P</kbd>
+          <% end %>
+        <% end %>
+        <% if can?(:admin, Spree::StockItem) %>
+          <%= link_to spree.admin_stock_items_path, class: "m27-command-item", data: { admin_command_target: "item" } do %>
+            <%= icon('building-warehouse') %><span><strong>Inventory</strong><small>Stock levels and locations</small></span><kbd>I</kbd>
+          <% end %>
+        <% end %>
+        <% if can?(:admin, :rider_voices) %>
+          <%= link_to main_app.admin_rider_voices_path, class: "m27-command-item", data: { admin_command_target: "item" } do %>
+            <%= icon('message-quote') %><span><strong>Rider voices</strong><small>Moderate community contributions</small></span><kbd>R</kbd>
+          <% end %>
+        <% end %>
+        <p class="m27-command-empty" data-admin-command-target="empty" hidden>No matching operation</p>
+      </div>
+      <footer class="m27-command-footer"><span>↑↓ Navigate</span><span>↵ Open</span><span>Esc Close</span></footer>
+    </section>
+  </dialog>
+</header>

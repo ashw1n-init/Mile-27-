@@ -1,0 +1,44 @@
+node_modules/
+.env
+.env.local
+.DS_Store
+# Local Admin API credentials minted by `spree api` / `spree auth`
+.spree/
+# Dependencies
+node_modules/
+.pnpm-store/
+.npm-cache/
+
+# Environment
+.env
+.env.*
+
+# Temporary
+tmp/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Ruby
+.bundle/
+vendor/bundle/
+
+# Build
+dist/
+build/
+.next/
+
+# Database
+*.sqlite3
+
+# Local Spree
+.spree/

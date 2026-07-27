@@ -1,0 +1,30 @@
+<section class="m27-live-visitors" data-controller="live-globe"
+         data-live-globe-endpoint-value="<%= main_app.admin_live_visitors_path %>"
+         data-live-globe-cable-url-value="/cable">
+  <header class="m27-live-visitors__header">
+    <div>
+      <p>Live geography</p>
+      <h2>Who is visiting</h2>
+      <span>Anonymous active sessions from the last two minutes</span>
+    </div>
+    <div class="m27-live-visitors__metrics">
+      <span class="m27-live-signal" data-live-globe-target="status" data-state="waiting">Connecting</span>
+      <strong data-live-globe-target="count">0</strong>
+      <small>active now</small>
+    </div>
+  </header>
+
+  <div class="m27-live-visitors__body">
+    <div class="m27-globe-stage" role="img" aria-label="Interactive globe showing approximate locations of active website visitors">
+      <canvas data-live-globe-target="canvas" tabindex="0"></canvas>
+      <div class="m27-globe-instruction"><span>Drag to rotate</span><span>Scroll to zoom</span></div>
+    </div>
+    <aside class="m27-location-panel">
+      <div class="m27-location-panel__head"><span>Active locations</span><small>Updated <b data-live-globe-target="updated">now</b></small></div>
+      <ol data-live-globe-target="locations">
+        <li class="is-empty">Waiting for active storefront sessions</li>
+      </ol>
+      <footer>Approximate city-level data · No raw IP storage</footer>
+    </aside>
+  </div>
+</section>

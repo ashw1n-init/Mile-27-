@@ -1,0 +1,15 @@
+﻿node.exe : [31maccess_denied:[39m API key lacks scope: write_all
+At C:\Users\Atman\mile27\node_modules\.bin\spree.ps1:24 char:5
++     & "node$exe"  "$basedir/../@spree/cli/dist/index.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31maccess_den...cope: write_all:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+{
+  "details": {
+    "required_scope": "write_all"
+  }
+}
+[2mHint: this key lacks `write_all`. Create one that has it and use it:[22m
+[2m  spree api-key create --type secret --scopes write_all[22m
+[2m  then pass it via --api-key <sk_...> or export SPREE_API_KEY=<sk_...>[22m

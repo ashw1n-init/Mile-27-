@@ -1,0 +1,65 @@
+<% content_for :page_title do %>
+  Rider voices
+<% end %>
+
+<div class="card mb-6">
+  <div class="card-body">
+    <%= form_with url: main_app.admin_rider_voices_path, method: :get, class: "grid grid-cols-1 md:grid-cols-4 gap-3", local: true do |form| %>
+      <%= form.search_field :q, value: params[:q], placeholder: "Search contributions", class: "form-control" %>
+      <%= form.select :status, options_for_select([["All statuses", ""]] + Spree::RiderContribution::STATUSES.map { |status| [status.humanize, status] }, params[:status]), {}, class: "form-select" %>
+      <%= form.select :type, options_for_select([["All types", ""]] + Spree::RiderContribution::TYPES.map { |type| [type.humanize, type] }, params[:type]), {}, class: "form-select" %>
+      <%= form.submit "Filter", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Contribution</th>
+          <th>Product</th>
+          <th>Author</th>
+          <th>Trust</th>
+          <th>Status</th>
+          <th>Reports</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rider_voices.each do |voice| %>
+          <tr>
+            <td>
+              <strong><%= voice.contribution_type.humanize %></strong>
+              <% if voice.rating %>
+                <span class="ms-2"><%= voice.rating %>/5</span>
+              <% end %>
+              <div class="text-muted text-sm mt-1"><%= truncate(voice.title.presence || voice.body, length: 90) %></div>
+            </td>
+            <td><%= voice.product.name %></td>
+            <td><%= voice.display_name %></td>
+            <td>
+              <% if voice.verified_purchase? %>
+                <span class="badge badge-success">Verified buyer</span>
+              <% else %>
+                <span class="badge badge-light">Community</span>
+              <% end %>
+            </td>
+            <td><span class="badge badge-light"><%= voice.status.humanize %></span></td>
+            <td><%= voice.reports.count %></td>
+            <td class="text-end"><%= link_to "Moderate", main_app.admin_rider_voice_path(voice), class: "btn btn-sm btn-light" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if @rider_voices.empty? %>
+    <div class="p-10 text-center text-muted">No rider contributions match these filters.</div>
+  <% end %>
+</div>
+
+<% if @pagy.pages > 1 %>
+  <div class="mt-6"><%== @pagy.series_nav %></div>
+<% end %>
