@@ -21,7 +21,8 @@ interface StoreMetadataParams {
 export async function generateStoreMetadata({
   locale,
 }: StoreMetadataParams): Promise<Metadata> {
-  const storeName = getStoreSeoTitle();
+  const seoTitle = getStoreSeoTitle();
+  const storeName = getStoreName();
   const storeUrl = getStoreUrl();
   const metaDescription = getStoreMetaDescription();
   const metaKeywords = process.env.STORE_META_KEYWORDS;
@@ -40,7 +41,7 @@ export async function generateStoreMetadata({
     ...metadataBaseSpread,
     title: {
       template: `%s | ${storeName}`,
-      default: storeName,
+      default: seoTitle,
     },
     description: metaDescription,
     icons: {

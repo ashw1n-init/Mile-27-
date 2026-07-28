@@ -9,7 +9,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { StoreProvider } from "@/contexts/StoreContext";
 import { getMarkets } from "@/lib/data/markets";
 import { generateStoreMetadata } from "@/lib/metadata/store";
-import { buildOrganizationJsonLd } from "@/lib/seo";
+import { buildOrganizationJsonLd, buildWebsiteJsonLd } from "@/lib/seo";
 import { getDefaultCountry, getDefaultLocale } from "@/lib/store";
 import deMessages from "../../../../messages/de.json";
 import enMessages from "../../../../messages/en.json";
@@ -83,6 +83,7 @@ export default async function CountryLocaleLayout({
         <AuthProvider>
           <CartProvider>
             <JsonLd data={buildOrganizationJsonLd()} />
+            <JsonLd data={buildWebsiteJsonLd(`/${country}/${locale}`)} />
             {children}
             <CartDrawer />
             <Toaster />

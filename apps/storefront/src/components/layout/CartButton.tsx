@@ -29,7 +29,7 @@ export function CartButton({
       size={showLabel ? "default" : "icon-lg"}
       onClick={openCart}
       aria-label={t("openCart")}
-      className={`relative gap-2 rounded-none px-3 ${overlay ? "text-white hover:bg-white/10" : ""}`}
+      className={`relative gap-2 rounded-full px-3 ${overlay ? "text-white hover:bg-white/10" : "hover:bg-black/[0.055]"}`}
     >
       <ShoppingBag className="size-4.5" />
       {showLabel && (
@@ -38,7 +38,7 @@ export function CartButton({
         </span>
       )}
       {mounted && itemCount > 0 && (
-        <span className="flex min-w-5 items-center justify-center border-l border-current pl-2 font-sans text-[9px]">
+        <span className="flex min-w-5 items-center justify-center rounded-full bg-current/10 px-1.5 py-0.5 font-sans text-[9px]">
           {itemCount}
         </span>
       )}

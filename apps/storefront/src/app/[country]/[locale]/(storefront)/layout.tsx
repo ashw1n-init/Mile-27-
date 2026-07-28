@@ -39,6 +39,11 @@ export default async function StorefrontLayout({
 }: StorefrontLayoutProps) {
   const { country, locale } = await params;
   const basePath = `/${country}/${locale}`;
+  const publishableKey = process.env.SPREE_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    throw new Error("SPREE_PUBLISHABLE_KEY is required for the storefront");
+  }
 
   const rootCategories = await getCategories({
     depth_eq: 0,
@@ -51,8 +56,15 @@ export default async function StorefrontLayout({
     });
 
   return (
-    <>
-      <LivePresenceHeartbeat country={country} locale={locale} />
+    <div
+      className="storefront-spatial-shell flex min-h-[100dvh] flex-col"
+      data-storefront-shell
+    >
+      <LivePresenceHeartbeat
+        country={country}
+        locale={locale}
+        publishableKey={publishableKey}
+      />
       <Header
         rootCategories={rootCategories}
         basePath={basePath}
@@ -69,6 +81,6 @@ export default async function StorefrontLayout({
         basePath={basePath}
         locale={locale as Locale}
       />
-    </>
+    </div>
   );
 }

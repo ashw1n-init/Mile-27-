@@ -88,15 +88,14 @@ function cartTag(surface: Surface): string {
 export async function getCheckoutOrder(cartId: string): Promise<Cart | null> {
   const surface = await resolveSurfaceForCart(cartId);
 
-  // Try active cart first (order may still be in checkout)
+  // Checkout is private, mutable session state. Only return the cart attached
+  // to this request's authenticated session or guest cart-token cookie, and
+  // require it to match the route parameter. Never fall back to orders.get()
+  // here: a copied checkout URL must not expose another customer's contact or
+  // address data. Completed orders use the separate getCompletedOrder flow.
   const cart = await getCart(undefined, surface);
   if (cart && cart.id === cartId) return cart;
-
-  // Cart completed — fetch as completed order.
-  return withFallback(
-    async () => (await getOrder(cartId, undefined, surface)) as unknown as Cart,
-    null,
-  );
+  return null;
 }
 
 export async function getCompletedOrder(cartId: string): Promise<Cart | null> {

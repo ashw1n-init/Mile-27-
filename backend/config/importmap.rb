@@ -7,3 +7,4 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@rails/actioncable", to: "@rails--actioncable.js" # @8.1.300
 pin "three" # @0.185.1
+pin "three-core", to: "three.core.js"

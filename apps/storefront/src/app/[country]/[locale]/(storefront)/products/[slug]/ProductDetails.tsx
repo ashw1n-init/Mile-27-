@@ -418,10 +418,10 @@ export function ProductDetails({ product, productStory }: ProductDetailsProps) {
   );
 
   return (
-    <article className="product-cinema overflow-clip bg-white text-[#1e1112]">
+    <article className="product-cinema min-w-0 max-w-full overflow-clip bg-white text-[#1e1112]">
       <section className="relative min-h-[calc(100dvh-4.5rem)] border-b border-[#9faaae]">
-        <div className="mx-auto grid min-h-[calc(100dvh-4.5rem)] max-w-[1920px] grid-cols-1 lg:grid-cols-12">
-          <div className="grid min-h-[58dvh] grid-rows-[auto_minmax(12rem,1fr)_auto] overflow-hidden border-b border-[#9faaae] px-4 pt-8 sm:px-8 lg:col-span-8 lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:border-b-0 lg:border-r lg:px-10">
+        <div className="mx-auto grid min-h-[calc(100dvh-4.5rem)] max-w-[1920px] grid-cols-[minmax(0,1fr)] lg:grid-cols-12">
+          <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] min-h-[58dvh] grid-rows-[auto_minmax(12rem,1fr)_auto] overflow-hidden border-b border-[#9faaae] px-4 pt-8 sm:px-8 lg:col-span-8 lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:border-b-0 lg:border-r lg:px-10">
             <div className="relative z-10 flex items-center justify-between font-sans text-[10px] uppercase tracking-[0.16em] text-[#5c656a]">
               <span className="shrink-0">{category?.name || "Product"}</span>
               <span className="ml-6 truncate text-right">
@@ -443,16 +443,16 @@ export function ProductDetails({ product, productStory }: ProductDetailsProps) {
               />
             </motion.div>
 
-            <div className="pointer-events-none relative z-10 pb-7 pt-5 lg:pb-10">
+            <div className="pointer-events-none relative z-10 min-w-0 max-w-full pb-7 pt-5 lg:pb-10">
               <h1
-                className={`${heroTitleClassName} text-balance break-words font-semibold`}
+                className={`${heroTitleClassName} w-full min-w-0 max-w-full text-balance break-words text-[clamp(2.25rem,11.5vw,3rem)] font-semibold leading-[0.88] tracking-[-0.055em] sm:text-[clamp(2.8rem,5.7vw,6.75rem)]`}
               >
                 {product.name}
               </h1>
             </div>
           </div>
 
-          <aside className="flex flex-col justify-between px-4 py-7 sm:px-8 lg:col-span-4 lg:px-10 lg:py-10">
+          <aside className="flex min-w-0 max-w-full flex-col justify-between px-4 py-7 sm:px-8 lg:col-span-4 lg:px-10 lg:py-10">
             <div>
               <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-[#5c656a]">
                 Select and configure

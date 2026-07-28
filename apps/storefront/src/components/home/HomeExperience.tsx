@@ -16,7 +16,7 @@ interface HomeExperienceProps {
 
 export function HomeExperience({ basePath }: HomeExperienceProps) {
   return (
-    <>
+    <div className="apex-home storefront-home-flow">
       <BootSequence />
       <HeroCarousel slides={defaultHeroSlides} basePath={basePath} />
       <TopPicksSection basePath={basePath} />
@@ -25,6 +25,6 @@ export function HomeExperience({ basePath }: HomeExperienceProps) {
       <BrandsDirectory basePath={basePath} />
       <MissionSection />
       <NewsletterSection />
-    </>
+    </div>
   );
 }

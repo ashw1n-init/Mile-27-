@@ -92,24 +92,22 @@ describe("checkout server actions", () => {
       expect(result).toBe(mockOrder);
     });
 
-    it("falls back to getOrder when cart is null (completed)", async () => {
-      const completedOrder = { ...mockOrder, current_step: "complete" };
+    it("fails closed when the active cart is unavailable", async () => {
       mockClient.carts.get.mockRejectedValue(new Error("Not found"));
-      mockClient.orders.get.mockResolvedValue(completedOrder);
 
       const result = await getCheckoutOrder("order-1");
 
-      expect(mockClient.orders.get).toHaveBeenCalled();
-      expect(result).toBe(completedOrder);
+      expect(mockClient.orders.get).not.toHaveBeenCalled();
+      expect(result).toBeNull();
     });
 
-    it("returns null when both cart and order fail", async () => {
-      mockClient.carts.get.mockRejectedValue(new Error("Not found"));
-      mockClient.orders.get.mockRejectedValue(new Error("Not found"));
+    it("does not expose a cart when the route id differs from the session cart", async () => {
+      mockClient.carts.get.mockResolvedValue(mockOrder);
 
-      const result = await getCheckoutOrder("bad-id");
+      const result = await getCheckoutOrder("another-customers-order");
 
       expect(result).toBeNull();
+      expect(mockClient.orders.get).not.toHaveBeenCalled();
     });
   });
 

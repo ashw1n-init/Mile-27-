@@ -32,8 +32,8 @@ export function DiscoveryMasthead({
   indexLabel = "Explore index",
 }: DiscoveryMastheadProps) {
   return (
-    <header className="border-b border-[#aaa9a4] bg-white text-[#0b0b0a]">
-      <div className="mx-auto max-w-[1920px] border-x border-[#d8d8d2]">
+    <header className="mx-3 mt-3 overflow-hidden rounded-[2rem] bg-white/80 text-[#0b0b0a] shadow-[0_24px_80px_rgba(56,61,64,0.09)] backdrop-blur-xl sm:mx-5 sm:mt-5 sm:rounded-[3rem]">
+      <div className="mx-auto max-w-[1920px]">
         <div
           className={`grid min-h-[18rem] ${imageUrl ? "lg:grid-cols-[minmax(0,1.5fr)_minmax(22rem,0.5fr)]" : ""}`}
         >
@@ -76,7 +76,7 @@ export function DiscoveryMasthead({
                 </h1>
               </div>
               {description && (
-                <p className="max-w-[34rem] border-l border-[#d8d8d2] pl-4 text-sm leading-relaxed text-[#66645f] md:justify-self-end md:text-base">
+                <p className="max-w-[34rem] rounded-[1.25rem] bg-black/[0.04] p-5 text-sm leading-relaxed text-[#66645f] md:justify-self-end md:text-base">
                   {description}
                 </p>
               )}
@@ -84,14 +84,14 @@ export function DiscoveryMasthead({
           </div>
 
           {imageUrl && (
-            <div className="relative min-h-64 overflow-hidden border-t border-[#d8d8d2] bg-[#f0f0ec] lg:min-h-full lg:border-l lg:border-t-0">
+            <div className="relative m-3 min-h-64 overflow-hidden rounded-[1.5rem] bg-[#e9ebe9] lg:ml-0 lg:min-h-[calc(100%-1.5rem)]">
               {/* biome-ignore lint/performance/noImgElement: remote category images do not expose stable dimensions */}
               <img
                 src={imageUrl}
                 alt=""
                 className="absolute inset-0 size-full object-cover grayscale transition-[filter,transform] duration-700 hover:scale-[1.025] hover:grayscale-0 motion-reduce:transition-none"
               />
-              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-white/90 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.12em] backdrop-blur-sm">
+              <div className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-full bg-white/85 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.12em] shadow-[0_8px_30px_rgba(56,61,64,0.12)] backdrop-blur-xl">
                 <span>Category plate</span>
                 <span>27</span>
               </div>
@@ -102,9 +102,9 @@ export function DiscoveryMasthead({
         {indexItems.length > 0 && (
           <section
             aria-labelledby="masthead-index-title"
-            className="border-t border-[#aaa9a4]"
+            className="px-3 pb-3 sm:px-5 sm:pb-5"
           >
-            <div className="flex items-center justify-between border-b border-[#d8d8d2] px-4 py-3 sm:px-6 lg:px-10 2xl:px-14">
+            <div className="flex items-center justify-between px-2 py-4 sm:px-3">
               <h2
                 id="masthead-index-title"
                 className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#66645f]"
@@ -117,13 +117,13 @@ export function DiscoveryMasthead({
             </div>
             <nav
               aria-label={indexLabel}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5"
+              className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5"
             >
               {indexItems.map((item, index) => (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className="group relative flex min-h-14 items-center gap-3 overflow-hidden border-b border-r border-[#d8d8d2] px-4 transition-colors duration-300 hover:bg-[#0b0b0a] hover:text-white focus-visible:z-10 focus-visible:bg-[#0b0b0a] focus-visible:text-white focus-visible:outline-2 focus-visible:outline-[#ff4d20]"
+                  className="group relative flex min-h-14 items-center gap-3 overflow-hidden rounded-full bg-black/[0.045] px-4 transition-[background-color,color,transform] duration-300 hover:-translate-y-0.5 hover:bg-[#0b0b0a] hover:text-white focus-visible:z-10 focus-visible:bg-[#0b0b0a] focus-visible:text-white focus-visible:outline-2 focus-visible:outline-[#d4030a]"
                 >
                   <span className="w-6 shrink-0 font-mono text-[9px] tracking-[0.12em] text-[#77756f] transition-colors group-hover:text-white/45 group-focus-visible:text-white/45">
                     {String(index + 1).padStart(2, "0")}

@@ -85,15 +85,15 @@ export function VariantPicker({
   if (optionTypes.length === 0) return null;
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 max-w-full space-y-6">
       {optionTypes.map((optionType) => {
         const values = Array.from(optionValuesMap[optionType.id] || []);
         const selectedValue = selectedOptions[optionType.id];
         const isColor = optionType.kind === "color_swatch";
 
         return (
-          <fieldset key={optionType.id}>
-            <legend className="mb-3 flex w-full items-baseline justify-between gap-4">
+          <fieldset key={optionType.id} className="min-w-0 max-w-full">
+            <legend className="mb-3 flex w-full min-w-0 max-w-full items-baseline justify-between gap-4">
               <span
                 className={`text-[11px] font-semibold uppercase tracking-[0.16em] ${
                   theme === "dark" ? "text-zinc-200" : "text-zinc-950"
@@ -103,7 +103,7 @@ export function VariantPicker({
               </span>
               {selectedValue && (
                 <span
-                  className={`truncate text-xs ${
+                  className={`min-w-0 truncate text-xs ${
                     theme === "dark" ? "text-zinc-500" : "text-zinc-500"
                   }`}
                 >
@@ -113,7 +113,7 @@ export function VariantPicker({
               )}
             </legend>
 
-            <div className="-mx-1 flex flex-nowrap gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+            <div className="flex w-full min-w-0 max-w-full flex-nowrap gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0">
               {values.map((value) => {
                 const optionValue =
                   optionValueDetailsMap[`${optionType.id}:${value}`];

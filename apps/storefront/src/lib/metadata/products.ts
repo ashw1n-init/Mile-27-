@@ -17,14 +17,22 @@ export async function generateProductsMetadata({
     : undefined;
 
   return {
-    title: "Products",
-    description: "Browse our full collection of products.",
+    title: "Motorcycle Helmets, Riding Gear & Accessories",
+    description:
+      "Shop premium motorcycle helmets, riding gear, intercoms and accessories from leading brands at Mile 27 Store, India.",
     ...(canonicalUrl ? { alternates: { canonical: canonicalUrl } } : {}),
     openGraph: {
-      title: "Products",
-      description: "Browse our full collection of products.",
+      title: "Motorcycle Helmets, Riding Gear & Accessories",
+      description:
+        "Shop premium motorcycle helmets, riding gear, intercoms and accessories from leading brands at Mile 27 Store, India.",
       ...(canonicalUrl ? { url: canonicalUrl } : {}),
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Motorcycle Helmets, Riding Gear & Accessories",
+      description:
+        "Shop premium motorcycle helmets, riding gear, intercoms and accessories from leading brands at Mile 27 Store, India.",
     },
   };
 }

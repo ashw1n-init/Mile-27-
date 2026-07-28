@@ -48,6 +48,16 @@ export function buildProductJsonLd(
     schema.sku = product.default_variant.sku;
   }
 
+  const brand = product.categories?.find((category) =>
+    /(^|\/)brands?(\/|$)/i.test(category.permalink),
+  );
+  if (brand) {
+    schema.brand = {
+      "@type": "Brand",
+      name: brand.name,
+    };
+  }
+
   const imageUrls = (product.media || [])
     .map((img: Media) => img.original_url || img.large_url)
     .filter(Boolean);
@@ -182,7 +192,11 @@ export function buildOrganizationJsonLd(): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": storeUrl ? `${storeUrl.replace(/\/$/, "")}#organization` : undefined,
     name: storeName,
+    alternateName: ["Mile27", "Mile27 Store", "Mile 27"],
+    foundingDate: "2019",
+    areaServed: { "@type": "Country", name: "India" },
     ...(storeUrl ? { url: storeUrl } : {}),
   };
 
@@ -224,4 +238,62 @@ export function buildOrganizationJsonLd(): Record<string, unknown> {
 
   return schema;
 }
+
+function storeUrlForPath(path: string): string | undefined {
+  const storeUrl = getStoreUrl();
+  return storeUrl ? buildCanonicalUrl(storeUrl, path) : undefined;
+}
+
+export function buildWebsiteJsonLd(basePath: string): Record<string, unknown> {
+  const storeUrl = getStoreUrl();
+  const rootUrl = storeUrl ? buildCanonicalUrl(storeUrl, basePath) : undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    ...(storeUrl ? { "@id": `${storeUrl.replace(/\/$/, "")}#website` } : {}),
+    name: getStoreName(),
+    alternateName: ["Mile27", "Mile27 Store", "Mile 27"],
+    ...(rootUrl ? { url: rootUrl } : {}),
+    ...(storeUrl
+      ? {
+          publisher: { "@id": `${storeUrl.replace(/\/$/, "")}#organization` },
+          potentialAction: {
+            "@type": "SearchAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate: `${buildCanonicalUrl(storeUrl, `${basePath}/products`)}?q={search_term_string}`,
+            },
+            "query-input": "required name=search_term_string",
+          },
+        }
+      : {}),
+  };
+}
+
+export function buildCollectionPageJsonLd(
+  category: Category,
+  basePath: string,
+): Record<string, unknown> {
+  const url = storeUrlForPath(`${basePath}/c/${category.permalink}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: category.name,
+    ...(category.description
+      ? { description: stripHtml(category.description) }
+      : {}),
+    ...(url ? { "@id": url, url } : {}),
+    isPartOf: getStoreUrl()
+      ? { "@id": `${getStoreUrl()?.replace(/\/$/, "")}#website` }
+      : undefined,
+    about: {
+      "@type": /(^|\/)brands?(\/|$)/i.test(category.permalink)
+        ? "Brand"
+        : "Thing",
+      name: category.name,
+    },
+  };
+}
+
 import { BRAND_LOGO_PATH } from "@/lib/brand";

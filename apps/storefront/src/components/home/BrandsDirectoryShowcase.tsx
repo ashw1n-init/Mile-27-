@@ -13,8 +13,9 @@ interface BrandsDirectoryShowcaseProps {
 }
 
 const imageEase = [0.22, 1, 0.36, 1] as const;
-const opticalFilter = "brightness(1.08) contrast(1.08) blur(7px)";
+const opticalFilter = "brightness(1.08) contrast(1.04) blur(12px)";
 const resolvedFilter = "brightness(1) contrast(1) blur(0px)";
+const closedAperture = "inset(48% 0 48% 0 round 2rem)";
 
 export function BrandsDirectoryShowcase({
   basePath,
@@ -24,14 +25,6 @@ export function BrandsDirectoryShowcase({
   const [direction, setDirection] = useState<1 | -1>(1);
   const reduceMotion = useReducedMotion();
   const active = brands[activeBrand];
-  const enteringClip =
-    direction > 0
-      ? "polygon(0% 0%, 0% 0%, -12% 100%, 0% 100%)"
-      : "polygon(100% 0%, 100% 0%, 100% 100%, 112% 100%)";
-  const exitingClip =
-    direction > 0
-      ? "polygon(100% 0%, 100% 0%, 100% 100%, 112% 100%)"
-      : "polygon(0% 0%, 0% 0%, -12% 100%, 0% 100%)";
 
   function selectBrand(index: number) {
     if (index === activeBrand) return;
@@ -42,7 +35,7 @@ export function BrandsDirectoryShowcase({
   return (
     <section
       aria-labelledby="brands-directory-title"
-      className="overflow-hidden bg-white px-5 py-20 text-black sm:px-8 sm:py-28 lg:px-10 lg:py-36"
+      className="spatial-home-island overflow-hidden px-5 py-20 text-black sm:px-8 sm:py-28 lg:px-10 lg:py-36"
     >
       <div className="mx-auto max-w-[1800px]">
         <div className="flex items-baseline justify-between gap-6">
@@ -58,7 +51,7 @@ export function BrandsDirectoryShowcase({
         </div>
 
         <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-[1.12fr_1fr] lg:items-stretch lg:gap-16">
-          <div className="relative min-h-[31rem] overflow-hidden sm:min-h-[38rem] lg:min-h-0">
+          <div className="relative min-h-[31rem] overflow-hidden rounded-[2rem] bg-[#eef0ee] sm:min-h-[38rem] lg:min-h-0">
             <span
               aria-hidden="true"
               className="absolute left-5 top-5 z-20 font-sans text-[10px] tracking-[0.14em] text-black/45 sm:left-7 sm:top-7"
@@ -82,10 +75,9 @@ export function BrandsDirectoryShowcase({
                     ? { opacity: 0 }
                     : {
                         opacity: 0,
-                        x: direction * 54,
-                        scale: 1.045,
-                        rotate: direction * 1.25,
-                        clipPath: enteringClip,
+                        y: direction * 18,
+                        scale: 0.95,
+                        clipPath: closedAperture,
                         filter: opticalFilter,
                       }
                 }
@@ -94,19 +86,16 @@ export function BrandsDirectoryShowcase({
                     ? { opacity: 1 }
                     : {
                         opacity: [0, 1, 1],
-                        x: [direction * 54, direction * 18, 0],
-                        scale: [1.045, 1.018, 1],
-                        rotate: [direction * 1.25, direction * 0.35, 0],
+                        y: [direction * 18, direction * 5, 0],
+                        scale: [0.95, 0.988, 1],
                         clipPath: [
-                          enteringClip,
-                          direction > 0
-                            ? "polygon(0% 0%, 76% 0%, 62% 100%, 0% 100%)"
-                            : "polygon(24% 0%, 100% 0%, 100% 100%, 38% 100%)",
-                          "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                          closedAperture,
+                          "inset(13% 0 13% 0 round 2rem)",
+                          "inset(0% 0 0% 0 round 2rem)",
                         ],
                         filter: [
                           opticalFilter,
-                          "brightness(1.03) contrast(1.04) blur(2px)",
+                          "brightness(1.025) contrast(1.02) blur(3px)",
                           resolvedFilter,
                         ],
                       }
@@ -116,38 +105,37 @@ export function BrandsDirectoryShowcase({
                     ? { opacity: 0 }
                     : {
                         opacity: 0,
-                        x: direction * -32,
+                        y: direction * -10,
                         scale: 0.985,
-                        rotate: direction * -0.6,
-                        clipPath: exitingClip,
-                        filter: opticalFilter,
-                        transition: { duration: 0.26, ease: imageEase },
+                        clipPath: "inset(44% 0 44% 0 round 2rem)",
+                        filter: "brightness(1.04) contrast(1.03) blur(8px)",
+                        transition: { duration: 0.38, ease: imageEase },
                       }
                 }
                 transition={{
-                  duration: reduceMotion ? 0.16 : 0.74,
-                  times: [0, 0.62, 1],
+                  duration: reduceMotion ? 0.16 : 0.86,
+                  times: [0, 0.54, 1],
                   ease: imageEase,
                 }}
               >
                 {!reduceMotion && (
                   <motion.span
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-[7%] top-[7%] z-30 w-px bg-[#d4030a]"
+                    className="pointer-events-none absolute inset-y-[4%] z-30 w-[24%] bg-gradient-to-r from-transparent via-[#d4030a]/12 to-transparent blur-xl"
                     initial={{
-                      left: direction > 0 ? "0%" : "100%",
+                      left: direction > 0 ? "-28%" : "104%",
                       opacity: 0,
                     }}
                     animate={{
                       left:
                         direction > 0
-                          ? ["0%", "72%", "100%"]
-                          : ["100%", "28%", "0%"],
-                      opacity: [0, 0.75, 0],
+                          ? ["-28%", "42%", "104%"]
+                          : ["104%", "42%", "-28%"],
+                      opacity: [0, 0.55, 0],
                     }}
                     transition={{
-                      duration: 0.66,
-                      times: [0, 0.64, 1],
+                      duration: 0.82,
+                      times: [0, 0.52, 1],
                       ease: imageEase,
                     }}
                   />
@@ -165,7 +153,7 @@ export function BrandsDirectoryShowcase({
                       sizes="(max-width: 1024px) 100vw, 52vw"
                       className="object-contain p-[10%] transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover/stage:scale-[1.025]"
                     />
-                    <span className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between gap-6 border-t border-black/20 pt-4 sm:bottom-7 sm:left-7 sm:right-7">
+                    <span className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between gap-6 rounded-[1.25rem] bg-white/80 p-4 shadow-[0_12px_36px_rgba(56,61,64,0.1)] backdrop-blur-xl sm:bottom-7 sm:left-7 sm:right-7">
                       <span>
                         <span className="block font-sans text-[9px] uppercase tracking-[0.15em] text-black/45">
                           {active.name} selection
@@ -196,20 +184,17 @@ export function BrandsDirectoryShowcase({
                 const isActive = activeBrand === index;
 
                 return (
-                  <li
-                    key={brand.id}
-                    className="border-b border-black/15 sm:odd:pr-4 sm:even:pl-4"
-                  >
+                  <li key={brand.id} className="p-1.5 sm:odd:pr-2 sm:even:pl-2">
                     <Link
                       href={`${basePath}/c/${brand.permalink}`}
                       onPointerEnter={() => selectBrand(index)}
                       onFocus={() => selectBrand(index)}
                       onClick={() => selectBrand(index)}
                       aria-current={isActive ? "true" : undefined}
-                      className={`group/brand flex h-full min-h-20 items-center justify-between gap-4 py-5 text-[clamp(1.7rem,2.8vw,3.35rem)] font-medium leading-none tracking-[-0.06em] transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#d4030a] lg:min-h-28 ${
+                      className={`group/brand flex h-full min-h-20 items-center justify-between gap-4 rounded-[1.25rem] px-4 py-5 text-[clamp(1.7rem,2.8vw,3.35rem)] font-medium leading-none tracking-[-0.06em] transition-[color,background-color,transform] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d4030a] lg:min-h-28 ${
                         isActive
-                          ? "text-black"
-                          : "text-black/30 hover:text-black/70"
+                          ? "bg-black text-white shadow-[0_14px_36px_rgba(23,23,24,0.14)]"
+                          : "text-black/30 hover:translate-x-1 hover:bg-black/[0.04] hover:text-black/70"
                       }`}
                     >
                       <span className="flex min-w-0 items-center gap-3">

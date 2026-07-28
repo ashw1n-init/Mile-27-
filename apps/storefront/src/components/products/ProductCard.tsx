@@ -7,6 +7,7 @@ import { memo } from "react";
 import { HiddenPricePrompt } from "@/components/products/HiddenPricePrompt";
 import { ProductImage } from "@/components/ui/product-image";
 import { trackSelectItem } from "@/lib/analytics/gtm";
+import { getProductCardAlternateImage } from "@/lib/product-card-media";
 
 const BRAND_PERMALINK_PATTERN = /(^|\/)brands?(\/|$)/i;
 const TAG_PERMALINK_PATTERN = /(^|\/)tags?(\/|$)/i;
@@ -35,6 +36,7 @@ export const ProductCard = memo(function ProductCard({
 }: ProductCardProps) {
   const t = useTranslations("products");
   const imageUrl = product.thumbnail_url || null;
+  const alternateImageUrl = getProductCardAlternateImage(product);
   const categories =
     product.categories?.filter((category) => !category.is_root) ?? [];
   const brand = categories.find((category) =>
@@ -78,27 +80,36 @@ export const ProductCard = memo(function ProductCard({
   return (
     <Link
       href={`${basePath}/products/${product.slug}${categoryId ? `?category_id=${categoryId}` : ""}`}
-      className="group relative block min-w-0 border-r border-b border-[#9faaae] bg-white focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-black"
+      className="group relative block min-w-0 overflow-hidden rounded-[1.25rem] bg-white/80 shadow-[0_14px_45px_rgba(56,61,64,0.08)] transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(56,61,64,0.13)] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#d4030a]"
       onClick={handleClick}
     >
-      <div className="flex min-h-10 items-center justify-between gap-2 border-b border-[#9faaae] px-3 py-2 font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-black/55 sm:px-4 sm:text-[10px]">
+      <div className="flex min-h-10 items-center justify-between gap-2 px-3 py-2 font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-black/45 sm:px-4 sm:text-[10px]">
         <span title={`Product index ${productIndex}`}>{productIndex}</span>
         <span className="truncate text-right">{context}</span>
       </div>
 
-      <div className="relative aspect-[4/5] overflow-hidden bg-[#ffffff]">
+      <div className="relative mx-2 aspect-[4/5] overflow-hidden rounded-[1rem] bg-[#f1f2f0]">
         <ProductImage
           src={imageUrl}
           alt={product.name}
           fill
-          className="object-contain p-3 transition-transform duration-500 ease-out motion-safe:group-hover:-translate-y-[0.5%] motion-safe:group-hover:scale-[1.012] sm:p-5"
+          className={`object-contain p-3 transition-opacity duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none sm:p-5 ${alternateImageUrl ? "group-hover:opacity-0 group-focus-visible:opacity-0" : ""}`}
           sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, (max-width: 1535px) 25vw, 20vw"
           iconClassName="w-16 h-16"
           fetchPriority={fetchPriority}
         />
+        {alternateImageUrl && (
+          <ProductImage
+            src={alternateImageUrl}
+            alt={`${product.name} alternate variant`}
+            fill
+            className="object-contain p-3 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none sm:p-5"
+            sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, (max-width: 1535px) 25vw, 20vw"
+          />
+        )}
       </div>
 
-      <div className="border-t border-[#9faaae] px-3 py-3 sm:px-4 sm:py-4">
+      <div className="px-3 py-3 sm:px-4 sm:py-4">
         <div className="mb-2 flex min-h-3 items-center justify-between gap-2 font-sans text-[9px] font-semibold uppercase tracking-[0.12em] sm:text-[10px]">
           <span className={onSale ? "text-[#d4030a]" : "text-black/45"}>
             {onSale ? t("sale") : "Product file"}
@@ -129,7 +140,7 @@ export const ProductCard = memo(function ProductCard({
           )}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-black/15 pt-2 font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-black/55 sm:text-[10px]">
+        <div className="mt-4 flex items-center justify-between rounded-full bg-black/[0.045] px-3 py-2 font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-black/55 sm:text-[10px]">
           <span>View equipment</span>
           <span
             aria-hidden="true"

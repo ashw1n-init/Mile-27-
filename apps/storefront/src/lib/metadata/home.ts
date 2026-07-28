@@ -33,5 +33,11 @@ export async function generateHomeMetadata({
       type: "website",
       images: [SOCIAL_IMAGE_PATH],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: storeName,
+      description,
+      images: [SOCIAL_IMAGE_PATH],
+    },
   };
 }

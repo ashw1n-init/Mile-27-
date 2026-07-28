@@ -49,10 +49,10 @@ export function MissionSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[240dvh] bg-white text-zinc-950 motion-reduce:min-h-[100dvh] sm:min-h-[260dvh] sm:motion-reduce:min-h-[100dvh]"
+      className="relative min-h-[240dvh] overflow-clip bg-white text-zinc-950 motion-reduce:min-h-[100dvh] sm:min-h-[260dvh] sm:motion-reduce:min-h-[100dvh]"
       aria-labelledby="mission-title"
     >
-      <div className="sticky top-0 flex h-[100dvh] flex-col justify-between overflow-hidden px-5 py-6 motion-reduce:static sm:px-8 sm:py-8 lg:px-10">
+      <div className="sticky top-0 flex h-[100dvh] flex-col justify-between overflow-hidden px-5 py-6 motion-reduce:static sm:px-8 sm:py-8 lg:px-12">
         <div className="flex items-start justify-between gap-6">
           <h2
             id="mission-title"

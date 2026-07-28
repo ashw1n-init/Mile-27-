@@ -6,7 +6,7 @@ import { getCategory, getCategoryProducts } from "@/lib/data/categories";
 import { resolveCurrency } from "@/lib/data/markets";
 import { getProductFilters } from "@/lib/data/products";
 import { generateCategoryMetadata } from "@/lib/metadata/category";
-import { buildBreadcrumbJsonLd } from "@/lib/seo";
+import { buildBreadcrumbJsonLd, buildCollectionPageJsonLd } from "@/lib/seo";
 import { getStoreUrl } from "@/lib/store";
 import { parseListingSearchParams } from "@/lib/utils/listing-search-params";
 import { CategoryBanner } from "./CategoryBanner";
@@ -65,6 +65,7 @@ export default async function CategoryPage({
       {storeUrl && (
         <JsonLd data={buildBreadcrumbJsonLd(category, basePath, storeUrl)} />
       )}
+      <JsonLd data={buildCollectionPageJsonLd(category, basePath)} />
 
       <CategoryBanner category={category} basePath={basePath} locale={locale} />
 

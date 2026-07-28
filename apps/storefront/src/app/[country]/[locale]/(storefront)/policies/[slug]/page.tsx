@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { PolicyExperience } from "@/components/policy/PolicyExperience";
+import { DEFAULT_POLICY_CONTENT } from "@/lib/constants/policy-content";
 import { getPolicy } from "@/lib/data/policies";
-import { getStoreName } from "@/lib/store";
+import { buildCanonicalUrl } from "@/lib/seo";
+import { getStoreUrl } from "@/lib/store";
+
+const POLICY_DESCRIPTIONS: Record<string, string> = {
+  "shipping-policy":
+    "Understand how Mile 27 Store processes, dispatches, tracks and delivers motorcycle equipment orders across India.",
+  "privacy-policy":
+    "Learn what information Mile 27 Store collects, why it is used, how it is protected and the choices available to you.",
+  "returns-policy":
+    "Understand return eligibility, inspections, exchanges and refunds for purchases from Mile 27 Store.",
+  "terms-of-service":
+    "Read the terms governing orders, payments, accounts and use of the Mile 27 Store website.",
+};
 
 interface PolicyPageProps {
   params: Promise<{
@@ -15,10 +29,8 @@ interface PolicyPageProps {
 export async function generateMetadata({
   params,
 }: PolicyPageProps): Promise<Metadata> {
-  const { slug, locale } = await params;
+  const { slug, locale, country } = await params;
   const policy = await getPolicy(slug);
-
-  const storeName = getStoreName();
 
   if (!policy) {
     const t = await getTranslations({
@@ -31,12 +43,22 @@ export async function generateMetadata({
     };
   }
 
+  const description =
+    POLICY_DESCRIPTIONS[slug] ||
+    `Read the current ${policy.name} for Mile 27 Store.`;
+  const storeUrl = getStoreUrl();
+  const canonical = storeUrl
+    ? buildCanonicalUrl(storeUrl, `/${country}/${locale}/policies/${slug}`)
+    : undefined;
+
   return {
-    title: storeName ? `${policy.name} | ${storeName}` : policy.name,
-    description: `${policy.name} — ${storeName}`,
+    title: policy.name,
+    description,
+    alternates: canonical ? { canonical } : undefined,
     openGraph: {
       title: policy.name,
-      description: `${policy.name} — ${storeName}`,
+      description,
+      url: canonical,
     },
   };
 }
@@ -44,7 +66,7 @@ export async function generateMetadata({
 export default async function PolicyPage({
   params,
 }: PolicyPageProps): Promise<React.JSX.Element> {
-  const { slug, locale } = await params;
+  const { slug, locale, country } = await params;
   const [policy, t] = await Promise.all([
     getPolicy(slug),
     getTranslations({ locale: locale as Locale, namespace: "policies" }),
@@ -54,21 +76,24 @@ export default async function PolicyPage({
     notFound();
   }
 
+  const fallbackBody = DEFAULT_POLICY_CONTENT[slug];
+  const bodyHtml = policy.body_html || fallbackBody;
+
+  if (!bodyHtml && !policy.body)
+    return (
+      <p className="mx-auto max-w-7xl px-6 py-24 text-black/50">
+        {t("noContent")}
+      </p>
+    );
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">{policy.name}</h1>
-      {policy.body_html ? (
-        <div
-          className="prose prose-gray"
-          dangerouslySetInnerHTML={{ __html: policy.body_html }}
-        />
-      ) : policy.body ? (
-        <div className="prose prose-gray whitespace-pre-wrap">
-          {policy.body}
-        </div>
-      ) : (
-        <p className="text-gray-500">{t("noContent")}</p>
-      )}
-    </div>
+    <PolicyExperience
+      basePath={`/${country}/${locale}`}
+      body={policy.body}
+      bodyHtml={bodyHtml}
+      name={policy.name}
+      slug={slug}
+      updatedAt={(policy as typeof policy & { updated_at?: string }).updated_at}
+    />
   );
 }

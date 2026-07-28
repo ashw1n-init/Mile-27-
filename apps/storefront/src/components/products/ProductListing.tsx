@@ -109,6 +109,7 @@ async function ProductListingInner({
     limit: PAGE_SIZE,
     ...queryParams,
     ...baseParams,
+    expand: ["variants", "media"],
     fields: PRODUCT_CARD_FIELDS,
   };
 

@@ -35,7 +35,7 @@ export const defaultHeroSlides: HeroSlide[] = [
     cta: "Explore helmets",
     href: "/products",
     image: "/hero/helmet-frieze.png",
-    imageAlt: "Editorial collage of full-face motorcycle helmets",
+    imageAlt: "Editorial panorama of full-face motorcycle helmets",
     focus: "Road / Sport",
   },
   {
@@ -46,7 +46,7 @@ export const defaultHeroSlides: HeroSlide[] = [
     cta: "Explore riding gear",
     href: "/products",
     image: "/hero/helmet-frieze.png",
-    imageAlt: "Editorial collage of helmeted motorcycle riders",
+    imageAlt: "Editorial panorama of helmeted motorcycle riders",
     focus: "Control / Comfort",
   },
   {
@@ -57,7 +57,7 @@ export const defaultHeroSlides: HeroSlide[] = [
     cta: "Discover intercoms",
     href: "/products",
     image: "/hero/helmet-frieze.png",
-    imageAlt: "Editorial collage of premium motorcycle protection",
+    imageAlt: "Editorial panorama of premium motorcycle protection",
     focus: "Solo / Group",
   },
   {
@@ -68,7 +68,7 @@ export const defaultHeroSlides: HeroSlide[] = [
     cta: "Explore accessories",
     href: "/products",
     image: "/hero/helmet-frieze.png",
-    imageAlt: "Editorial collage of helmets and riding equipment",
+    imageAlt: "Editorial panorama of helmets and riding equipment",
     focus: "Carry / Protect",
   },
 ];
@@ -77,13 +77,6 @@ interface HeroCarouselProps {
   slides: HeroSlide[];
   basePath: string;
 }
-
-const spring = {
-  type: "spring" as const,
-  stiffness: 120,
-  damping: 24,
-  mass: 0.9,
-};
 
 export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -153,47 +146,45 @@ export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
         const distance = event.changedTouches[0].clientX - touchStart.current;
         if (Math.abs(distance) > 54) step(distance < 0 ? 1 : -1);
       }}
-      className="apex-hero relative flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-black text-white outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#d4030a]"
+      className="apex-hero relative flex min-h-[78svh] flex-col overflow-hidden bg-[#090909] text-white outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#d4030a] sm:min-h-[80svh] lg:min-h-[82svh]"
     >
       <div className="relative flex flex-1 flex-col overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(212,3,10,.18),transparent_26%),radial-gradient(circle_at_72%_44%,rgba(255,255,255,.08),transparent_43%)]" />
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={activeSlide.id}
             custom={direction}
-            initial={{
-              clipPath:
-                direction > 0 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
-            }}
-            animate={{ clipPath: "inset(0 0 0 0)" }}
-            exit={{
-              clipPath:
-                direction > 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
-            }}
-            transition={{ duration: 0.72, ease: [0.76, 0, 0.24, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
             className="absolute inset-0"
             aria-hidden="true"
           >
             <motion.div
-              initial={{ x: direction > 0 ? "8%" : "-8%", scale: 1.06 }}
-              animate={{ x: "0%", scale: 1 }}
-              exit={{ x: direction > 0 ? "-6%" : "6%", scale: 1.03 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-x-[5%] bottom-[15%] top-[12%] sm:inset-x-[12%] sm:bottom-[13%] sm:top-[10%]"
+              initial={{ x: reduceMotion ? 0 : direction > 0 ? 36 : -36 }}
+              animate={{ x: 0 }}
+              exit={{ x: reduceMotion ? 0 : direction > 0 ? -24 : 24 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.72,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="absolute inset-0"
             >
               <Image
                 src={activeSlide.image}
-                alt=""
+                alt={activeSlide.imageAlt}
                 fill
                 priority={activeIndex === 0}
                 loading={activeIndex === 0 ? "eager" : "lazy"}
                 sizes="(max-width: 768px) 100vw, 84vw"
-                className="hero-duotone object-contain"
+                className="hero-duotone object-cover object-center"
               />
             </motion.div>
           </motion.div>
         </AnimatePresence>
 
-        <div className="pointer-events-none absolute inset-x-0 top-5 z-20 hidden grid-cols-3 px-6 font-serif text-[clamp(1.2rem,2.2vw,2.8rem)] leading-none md:grid lg:px-12">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 hidden grid-cols-3 items-center px-8 py-7 font-sans text-[9px] font-medium uppercase tracking-[.18em] text-white/55 md:grid lg:px-12">
           <span>{activeSlide.category}</span>
           <span className="text-center">
             {String(activeIndex + 1).padStart(2, "0")}—
@@ -202,7 +193,7 @@ export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
           <span className="text-right">{activeSlide.focus}</span>
         </div>
 
-        <div className="pointer-events-none relative z-20 flex flex-1 items-center justify-center px-4 [perspective:1200px]">
+        <div className="pointer-events-none relative z-20 flex flex-1 items-center px-5 pb-28 pt-16 [perspective:1400px] sm:px-8 md:px-12 lg:pb-24">
           <div className="absolute left-4 top-5 font-sans text-[10px] uppercase tracking-[0.14em] md:hidden">
             {String(activeIndex + 1).padStart(2, "0")} /{" "}
             {String(slideCount).padStart(2, "0")} — {activeSlide.category}
@@ -224,19 +215,26 @@ export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
                   }
             }
           >
-            <AnimatePresence mode="wait" initial={false}>
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
               <motion.div
                 key={activeSlide.id}
-                initial={{ y: direction > 0 ? 80 : -80 }}
-                animate={{ y: 0 }}
-                exit={{ y: direction > 0 ? -80 : 80 }}
-                transition={spring}
-                className="relative mt-6 text-center"
+                custom={direction}
+                initial={{ y: reduceMotion ? 0 : 28, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: reduceMotion ? 0 : -18, opacity: 0 }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.58,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="relative mt-6 max-w-[92vw] overflow-hidden text-left lg:max-w-[62vw]"
               >
-                <h1 className="whitespace-nowrap text-[clamp(3.35rem,10.5vw,12rem)] font-semibold leading-[0.78] tracking-[-0.085em]">
+                <p className="mb-5 font-sans text-[9px] font-semibold uppercase tracking-[.2em] text-[#ef1a22] sm:text-[10px]">
+                  {activeSlide.category} / Curated 027
+                </p>
+                <h1 className="max-w-[9ch] text-[clamp(4.2rem,10.2vw,11rem)] font-semibold leading-[0.73] tracking-[-0.09em]">
                   {activeSlide.title}
                 </h1>
-                <p className="mx-auto mt-5 max-w-sm text-sm leading-relaxed text-white/62 sm:text-base">
+                <p className="mt-7 max-w-[30rem] pl-1 text-sm leading-relaxed text-white/58 sm:text-base lg:ml-[18vw]">
                   {activeSlide.kicker}
                 </p>
               </motion.div>
@@ -244,10 +242,10 @@ export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
           </motion.div>
         </div>
 
-        <div className="relative z-30 grid shrink-0 border-t border-white/25 md:grid-cols-[1fr_auto]">
+        <div className="absolute inset-x-4 bottom-4 z-30 flex items-end gap-3 sm:inset-x-6 md:inset-x-8 lg:inset-x-12">
           <nav
             aria-label="Hero chapters"
-            className="flex min-w-0 overflow-x-auto"
+            className="flex min-w-0 flex-1 gap-1 overflow-x-auto rounded-full bg-white/[.08] p-1.5 backdrop-blur-xl"
           >
             {slides.map((slide, index) => {
               const isActive = index === activeIndex;
@@ -258,20 +256,20 @@ export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
                   onClick={() => goTo(index)}
                   aria-label={`Show ${slide.category}`}
                   aria-current={isActive ? "true" : undefined}
-                  className={`relative min-h-16 min-w-[42vw] flex-1 border-r border-white/20 px-4 text-left font-serif text-lg transition-colors sm:min-w-36 md:min-w-0 md:px-6 md:text-2xl ${
+                  className={`relative min-h-11 min-w-[9rem] flex-1 rounded-full px-4 text-left font-sans text-[10px] font-semibold uppercase tracking-[.11em] transition-[color,background-color] sm:min-w-32 md:min-w-0 md:text-center ${
                     isActive
-                      ? "bg-[#d4030a] text-white"
-                      : "bg-black text-white/72 hover:bg-white hover:text-black"
+                      ? "bg-white text-black"
+                      : "text-white/55 hover:bg-white/10 hover:text-white"
                   }`}
                 >
-                  <span className="block font-sans text-[8px] uppercase tracking-[0.14em] opacity-55">
+                  <span className="mr-2 text-[8px] opacity-45">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {slide.category}
                   {isActive && (
                     <motion.span
                       layoutId="hero-chapter-active"
-                      className="absolute inset-x-0 top-0 h-[3px] bg-[#d4030a]"
+                      className="absolute left-3 top-1/2 size-1 -translate-y-1/2 rounded-full bg-[#d4030a] md:left-4"
                     />
                   )}
                 </button>
@@ -280,7 +278,7 @@ export function HeroCarousel({ slides, basePath }: HeroCarouselProps) {
           </nav>
           <Link
             href={`${basePath}${activeSlide.href}`}
-            className="group flex min-h-16 items-center justify-between gap-8 bg-[#d4030a] px-5 text-xs font-semibold uppercase tracking-[0.08em] text-black transition-colors hover:bg-white md:min-w-64 md:px-7"
+            className="group flex min-h-14 shrink-0 items-center justify-between gap-8 rounded-full bg-[#d4030a] px-6 text-[10px] font-semibold uppercase tracking-[0.1em] text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-white hover:text-black md:min-w-60"
           >
             {activeSlide.cta}
             <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />

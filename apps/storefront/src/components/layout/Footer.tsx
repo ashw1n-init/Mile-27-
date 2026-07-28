@@ -37,16 +37,34 @@ export async function Footer({
   const wholesaleEnabled = isWholesaleEnabled();
 
   return (
-    <footer className="rounded-t-[2rem] bg-[#ffffff] px-5 pb-5 pt-16 text-zinc-950 sm:rounded-t-[3rem] sm:px-8 sm:pb-8 sm:pt-20 lg:rounded-t-[4rem] lg:px-10 lg:pb-10 lg:pt-24">
+    <footer className="m-0 rounded-none bg-white/80 px-5 pb-5 pt-16 text-zinc-950 shadow-[0_24px_80px_rgba(56,61,64,0.09)] backdrop-blur-xl sm:px-8 sm:pb-8 sm:pt-20 lg:px-10 lg:pb-10 lg:pt-24">
       <div className="mx-auto max-w-[1800px]">
         <div className="grid gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
           <div className="flex flex-col justify-between">
-            <Link
-              href={basePath}
-              className="w-fit text-[clamp(4.8rem,13vw,14rem)] font-semibold leading-[0.72] tracking-[-0.1em] transition-transform duration-500 hover:translate-x-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4030a]"
-            >
-              MILE 27
-            </Link>
+            <div className="max-w-[62rem]">
+              <div className="mb-5 flex items-center justify-between gap-6 font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-zinc-500 sm:text-[10px]">
+                <span>Road equipment / performance edit</span>
+                <span className="hidden sm:block">Kollam · India</span>
+              </div>
+              <Link
+                href={basePath}
+                aria-label="Mile 27 home"
+                className="font-cal-sans group/wordmark relative block w-fit max-w-full overflow-visible pb-[0.12em] pt-[0.08em] text-[clamp(3.7rem,9.2vw,10.5rem)] font-semibold lowercase leading-[0.9] tracking-[-0.075em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4030a]"
+              >
+                <span className="block pr-[0.04em] transition-[color,transform] duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover/wordmark:translate-x-[0.025em] group-hover/wordmark:text-[#d4030a]">
+                  mile27store
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-[0.14] bg-[#d4030a] transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover/wordmark:scale-x-100"
+                />
+              </Link>
+              <div className="mt-5 flex items-center gap-4 font-sans text-[9px] uppercase tracking-[0.16em] text-zinc-400 sm:text-[10px]">
+                <span>Est. 2019</span>
+                <span aria-hidden="true" className="h-px w-8 bg-[#d4030a]" />
+                <span>27 miles forward</span>
+              </div>
+            </div>
             <p className="mt-12 max-w-[29ch] text-sm leading-relaxed text-zinc-500 lg:mt-24">
               A sharper edit of helmets, riding gear, and the pieces that make
               every mile count.
@@ -118,8 +136,8 @@ export async function Footer({
               </ul>
             </div>
 
-            <div>
-              <h2 className="text-sm font-medium">Info</h2>
+            <nav aria-label="Store policies">
+              <h2 className="text-sm font-medium">Policies</h2>
               <ul className="mt-5 space-y-3 text-sm text-zinc-500">
                 {POLICY_LINKS.map((policy) => (
                   <li key={policy.slug}>
@@ -132,46 +150,51 @@ export async function Footer({
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-8 border-t border-zinc-950/15 pt-5 sm:mt-20 lg:flex-row lg:items-center lg:justify-between">
-          <nav className="flex items-center gap-3" aria-label="Follow Mile 27">
-            {socialLinks.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Follow Mile 27 on ${label}`}
-                className="flex size-10 items-center justify-center border border-zinc-950/20 transition-colors duration-300 hover:border-zinc-950 hover:bg-zinc-950 hover:text-[#d4030a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4030a]"
-              >
-                <Icon className="size-4" strokeWidth={1.5} />
-              </a>
-            ))}
-          </nav>
-
-          <section
-            className="flex items-center gap-2"
-            aria-label="Accepted payment methods"
-          >
-            <VisaFlatRoundedIcon width={42} aria-label="Visa" />
-            <MastercardFlatRoundedIcon width={42} aria-label="Mastercard" />
-            <PayPalFlatRoundedIcon width={42} aria-label="PayPal" />
-          </section>
-
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-zinc-500">
-            <span>
-              © <CurrentYear /> Mile 27
-            </span>
-            <Link
-              href={`${basePath}/products`}
-              className="group flex items-center gap-1 text-zinc-950 transition-colors hover:text-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4030a]"
+        <div className="mt-16 rounded-[1.5rem] bg-black/[0.035] p-5 sm:mt-20">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <nav
+              className="flex items-center gap-3"
+              aria-label="Follow Mile 27"
             >
-              Shop the edit
-              <ArrowUpRight className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Follow Mile 27 on ${label}`}
+                  className="flex size-10 items-center justify-center rounded-full bg-white/80 shadow-[0_6px_18px_rgba(56,61,64,0.08)] transition-colors duration-300 hover:bg-zinc-950 hover:text-[#d4030a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4030a]"
+                >
+                  <Icon className="size-4" strokeWidth={1.5} />
+                </a>
+              ))}
+            </nav>
+
+            <section
+              className="flex items-center gap-2"
+              aria-label="Accepted payment methods"
+            >
+              <VisaFlatRoundedIcon width={42} aria-label="Visa" />
+              <MastercardFlatRoundedIcon width={42} aria-label="Mastercard" />
+              <PayPalFlatRoundedIcon width={42} aria-label="PayPal" />
+            </section>
+
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-zinc-500">
+              <span>
+                © <CurrentYear /> Mile 27
+              </span>
+              <Link
+                href={`${basePath}/products`}
+                className="group flex items-center gap-1 text-zinc-950 transition-colors hover:text-zinc-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4030a]"
+              >
+                Shop the edit
+                <ArrowUpRight className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ export function getStoreUrl(): string | undefined {
   if (raw) return ensureProtocol(raw);
   return process.env.NODE_ENV === "development"
     ? "http://localhost:3001"
-    : undefined;
+    : "https://mile27store.in";
 }
 
 /**
@@ -44,9 +44,7 @@ export function getStoreName(): string {
  * Get the store description from environment variables.
  */
 export function getStoreDescription(): string {
-  return (
-    process.env.NEXT_PUBLIC_STORE_DESCRIPTION || BRAND_META_DESCRIPTION
-  );
+  return process.env.NEXT_PUBLIC_STORE_DESCRIPTION || BRAND_META_DESCRIPTION;
 }
 
 /**
@@ -93,6 +91,7 @@ export function getStoreEmailFrom(): string {
 export function isStoreEmailFromFallback(): boolean {
   return !process.env.EMAIL_FROM;
 }
+
 import {
   BRAND_META_DESCRIPTION,
   BRAND_NAME,

@@ -65,6 +65,12 @@ export async function generateProductMetadata({
       type: "website",
       ...(ogImage ? { images: [ogImage] } : {}),
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(ogImage ? { images: [ogImage.url] } : {}),
+    },
     other: {
       ...(product.price?.amount
         ? { "product:price:amount": product.price.amount }

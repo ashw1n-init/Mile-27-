@@ -1,6 +1,6 @@
 import type { Product } from "@spree/sdk";
 import { SpatialRail } from "@/components/home/SpatialRail";
-import { getProducts } from "@/lib/data/products";
+import { getCategory, getCategoryProducts } from "@/lib/data/categories";
 
 interface SpatialRailSectionProps {
   basePath: string;
@@ -9,7 +9,13 @@ interface SpatialRailSectionProps {
 export async function SpatialRailSection({
   basePath,
 }: SpatialRailSectionProps) {
-  const products = await getProducts({ limit: 6, sort: "best_selling" })
+  const products = await getCategory("brands/agv")
+    .then((brand) =>
+      getCategoryProducts(brand.id, {
+        limit: 6,
+        sort: "-available_on",
+      }),
+    )
     .then((response) => response.data)
     .catch(() => [] as Product[]);
 

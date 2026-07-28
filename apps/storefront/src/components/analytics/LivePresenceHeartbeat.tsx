@@ -25,11 +25,13 @@ function sessionId() {
 interface LivePresenceHeartbeatProps {
   country: string;
   locale: string;
+  publishableKey: string;
 }
 
 export function LivePresenceHeartbeat({
   country,
   locale,
+  publishableKey,
 }: LivePresenceHeartbeatProps) {
   const pathname = usePathname();
 
@@ -47,7 +49,10 @@ export function LivePresenceHeartbeat({
 
       void fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-spree-api-key": publishableKey,
+        },
         body: JSON.stringify({
           session_id: sessionId(),
           country,
@@ -68,7 +73,7 @@ export function LivePresenceHeartbeat({
       window.clearInterval(interval);
       document.removeEventListener("visibilitychange", send);
     };
-  }, [country, locale, pathname]);
+  }, [country, locale, pathname, publishableKey]);
 
   return null;
 }

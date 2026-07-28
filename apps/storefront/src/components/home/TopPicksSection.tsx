@@ -8,10 +8,18 @@ interface TopPicksSectionProps {
 
 export async function TopPicksSection({ basePath }: TopPicksSectionProps) {
   const [newArrivals, topPicks] = await Promise.all([
-    getProducts({ limit: 6, sort: "-available_on" })
+    getProducts({
+      limit: 6,
+      sort: "-available_on",
+      expand: ["variants", "media"],
+    })
       .then((response) => response.data)
       .catch(() => [] as Product[]),
-    getProducts({ limit: 6, sort: "best_selling" })
+    getProducts({
+      limit: 6,
+      sort: "best_selling",
+      expand: ["variants", "media"],
+    })
       .then((response) => response.data)
       .catch(() => [] as Product[]),
   ]);

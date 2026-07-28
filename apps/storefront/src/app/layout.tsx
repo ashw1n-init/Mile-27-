@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import "cal-sans";
 import "./globals.css";
 import { Suspense } from "react";
 import { getStoreDescription, getStoreName } from "@/lib/store";

@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { ProductImage } from "@/components/ui/product-image";
+import { getProductCardAlternateImage } from "@/lib/product-card-media";
 
 interface ProductRunwayProps {
   basePath: string;
@@ -25,6 +26,8 @@ function RunwayProductCard({
   showNew: boolean;
   index: number;
 }) {
+  const alternateImageUrl = getProductCardAlternateImage(product);
+
   return (
     <article className="group min-w-0">
       <Link
@@ -40,10 +43,23 @@ function RunwayProductCard({
             alt={product.name}
             fill
             sizes="(max-width: 640px) 82vw, (max-width: 1024px) 42vw, 17vw"
-            className="object-contain p-[5%] transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-[1.055]"
+            className={`object-contain p-[5%] transition-opacity duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none ${alternateImageUrl ? "group-hover:opacity-0 group-focus-within:opacity-0" : ""}`}
           />
+          {alternateImageUrl && (
+            <ProductImage
+              src={alternateImageUrl}
+              alt={`${product.name} alternate variant`}
+              fill
+              sizes="(max-width: 640px) 82vw, (max-width: 1024px) 42vw, 17vw"
+              className="object-contain p-[5%] opacity-0 transition-opacity duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:opacity-100 group-focus-within:opacity-100 motion-reduce:transition-none"
+            />
+          )}
           {showNew && (
-            <span className="absolute right-3 top-3 bg-[#d4030a] px-2 py-1 font-sans text-[8px] font-semibold uppercase leading-none tracking-[0.1em] text-black">
+            <span className="absolute right-3 top-3 z-10 inline-flex h-7 items-center gap-2 rounded-full bg-black/90 px-2.5 font-sans text-[8px] font-semibold uppercase leading-none tracking-[0.16em] text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] backdrop-blur-sm transition-[transform,background-color] duration-300 ease-out group-hover:-translate-y-0.5 group-hover:bg-black motion-reduce:transition-none">
+              <span className="relative flex size-1.5" aria-hidden="true">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#d4030a] opacity-40 motion-reduce:animate-none" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-[#d4030a]" />
+              </span>
               Just in
             </span>
           )}

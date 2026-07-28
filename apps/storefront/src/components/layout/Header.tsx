@@ -75,7 +75,7 @@ export async function Header({
             >
               <PixelRunnerMark className="size-12 xl:size-[3.65rem]" />
             </Link>
-            <span className="hidden border-l border-[#9faaae] pl-5 font-sans text-[9px] uppercase leading-tight tracking-[0.16em] text-[#5c656a] xl:block">
+            <span className="hidden pl-2 font-sans text-[9px] uppercase leading-tight tracking-[0.16em] text-[#5c656a] xl:block">
               Road equipment
               <br />
               performance edit
@@ -85,28 +85,23 @@ export async function Header({
         center={
           <nav
             aria-label="Primary navigation"
-            className="hidden h-full items-center justify-center xl:flex"
+            className="my-auto hidden h-12 items-center justify-center gap-1 rounded-full bg-black/[0.045] p-1.5 xl:flex"
           >
             <Link
               href={`${basePath}/products`}
-              className="group flex h-full items-center border-l border-[#9faaae] px-4 text-xs font-semibold uppercase tracking-[0.08em] focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#d4030a] xl:px-5"
+              className="group flex h-9 items-center rounded-full bg-zinc-950 px-4 text-[11px] font-semibold uppercase tracking-[0.08em] text-white shadow-[0_8px_22px_rgba(23,23,24,0.16)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d4030a] xl:px-5"
             >
-              <span className="mr-2 font-sans text-[8px] text-[#d4030a]">
-                00
-              </span>
+              <span className="mr-2 size-1.5 rounded-full bg-[#d4030a]" />
               Shop all
             </Link>
             {primaryCategories.map((category, index) => (
               <Link
                 key={category.id}
                 href={`${basePath}/c/${category.permalink}`}
-                className={`group flex h-full max-w-48 items-center border-l border-[#9faaae] px-4 text-xs uppercase tracking-[0.08em] focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#d4030a] xl:px-5 ${
+                className={`group flex h-9 max-w-48 items-center rounded-full px-4 text-[11px] uppercase tracking-[0.08em] transition-[background-color,color,transform] duration-300 hover:-translate-y-px hover:bg-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d4030a] xl:px-5 ${
                   index < 2 ? "font-semibold" : "text-[#5c656a]"
                 }`}
               >
-                <span className="mr-2 font-sans text-[8px] text-[#9faaae]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <span className="truncate transition-colors group-hover:text-[#d4030a]">
                   {category.name}
                 </span>

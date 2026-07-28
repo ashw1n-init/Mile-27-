@@ -160,6 +160,7 @@ export function SearchBar({ basePath, autoFocus, onNavigate }: SearchBarProps) {
       <form onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroupInput
+            className="search-expanded-input"
             ref={inputRef}
             type="search"
             value={query}

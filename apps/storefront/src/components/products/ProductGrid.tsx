@@ -32,7 +32,7 @@ export function ProductGrid({
   }
 
   return (
-    <div className="grid grid-cols-2 border-l border-t border-[#9faaae] md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+    <div className="grid grid-cols-2 gap-4 px-3 py-5 sm:gap-6 sm:px-5 sm:py-7 md:grid-cols-3 lg:grid-cols-4 lg:gap-7 lg:px-8 2xl:grid-cols-5">
       {products.map((product, index) => (
         <ProductCard
           key={product.id}

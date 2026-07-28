@@ -7,6 +7,7 @@ import { getProduct } from "./products";
 export const PRODUCT_PAGE_EXPAND = [
   "variants",
   "media",
+  "variants",
   "option_types",
   "custom_fields",
   "categories.ancestors",
@@ -29,6 +30,7 @@ export const PRODUCT_CARD_FIELDS = [
   "name",
   "slug",
   "thumbnail_url",
+  "media",
   "purchasable",
   "default_variant_id",
   "price",

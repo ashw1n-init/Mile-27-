@@ -1,4 +1,5 @@
 import type { Category, Media, Product } from "@spree/sdk";
+import { POLICY_LINKS } from "@/lib/constants/policies";
 import { getClient } from "@/lib/spree";
 import { getDefaultCountry, getDefaultLocale, getStoreUrl } from "@/lib/store";
 
@@ -27,7 +28,7 @@ interface LocaleOptions {
 
 /** Google's limit is 50,000 URLs per sitemap file. */
 const URLS_PER_SITEMAP = 50_000;
-const STATIC_PAGES_PER_LOCALE = 3;
+const STATIC_PAGES_PER_LOCALE = 2 + POLICY_LINKS.length;
 const ITEMS_PER_PAGE = 100;
 const MAX_PAGES = 1000;
 /** Maximum items we can actually fetch, given pagination limits. */
@@ -207,11 +208,11 @@ export default async function sitemap(props: {
         changeFrequency: "daily",
         priority: 0.8,
       },
-      {
-        url: `${basePath}/c`,
-        changeFrequency: "weekly",
-        priority: 0.7,
-      },
+      ...POLICY_LINKS.map((policy) => ({
+        url: `${basePath}/policies/${policy.slug}`,
+        changeFrequency: "monthly" as const,
+        priority: 0.4,
+      })),
     );
 
     // Product pages with image sitemaps (locale-aware slugs)
